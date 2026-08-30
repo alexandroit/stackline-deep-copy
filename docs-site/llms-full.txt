@@ -1,0 +1,8 @@
+# @stackline/deep-copy
+
+Alexandro.Net documents `@stackline/deep-copy`, a compatibility-first maintained
+continuation of `deep-copy@1.4.2`. It preserves CommonJS, AMD, the classic
+`dcopy` global, demonstrated plain-object/dense-array/Date/function behavior,
+and Node 4 compatibility. It adds native ESM, current types, cycle-safe
+iterative traversal, safe dangerous-key writes, and a 100,000 composite-node
+limit. It has zero production dependencies and is independently maintained.

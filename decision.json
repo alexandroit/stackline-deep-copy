@@ -1,0 +1,62 @@
+{
+  "schema": "stackline-package-decision-v1",
+  "package": "deep-copy",
+  "target": "@stackline/deep-copy",
+  "version": "1.0.0",
+  "upstreamVersion": "1.4.2",
+  "sourceIntakePosition": 17,
+  "selectedQueueRank": 1,
+  "selectedQueueRankBasis": "EFFECTIVE_UNCONSUMED_SCOUT_INTAKE_RANK_AFTER_TERMINAL_DECISIONS",
+  "selectedByUserPin": false,
+  "observationDate": "2026-08-29",
+  "observedAt": "2026-08-30T02:52:11Z",
+  "decidedAt": "2026-08-30T02:52:11Z",
+  "transition": "QUALIFIED -> RESEARCHING -> GO",
+  "canonicalState": "BUILDING",
+  "decision": "GO",
+  "reasonCode": "STALE_ZERO_DEPENDENCY_LEGACY_UTILITY_WITH_REPRODUCIBLE_EDGE_DEFECTS_AND_TWO_DISTINCT_DIRECT_ADOPTION_PATHS",
+  "upstream": {
+    "publishedAt": "2018-01-11T19:01:55.365Z",
+    "license": "MIT",
+    "repository": "https://github.com/simov/deep-copy",
+    "gitHead": "a50fb62d06c7d4825e16bada79b9ddbb8c3c2e9f",
+    "tarballSha1": "0622719257e4bd60240e401ea96718211c5c4697",
+    "tarballSha256": "8b0aeca0c91757ddeb5f05c10325a845f6852299b783bb7dc6cb6e01f733342c",
+    "tarballSha512": "57167043fd7e58640f9799c4ebbb8b861ecea9dae6a88d4e6b3aeb68ef416f0fccf01b7a32897f471cc303a37a660457a6c1bf5bd3e0523f04d4b1c7044ab619"
+  },
+  "downloads": {
+    "count": 488304,
+    "start": "2026-08-23",
+    "end": "2026-08-29",
+    "source": "https://api.npmjs.org/downloads/point/2026-08-23:2026-08-29/deep-copy",
+    "proofOfDirectUse": false
+  },
+  "productionClosure": {
+    "result": "PASS",
+    "installedPackageNodesIncludingRoot": 1,
+    "allNodes": ["@stackline/deep-copy@1.0.0"],
+    "runtimeDependencies": [],
+    "optionalDependencies": [],
+    "peerDependencies": [],
+    "bundledDependencies": [],
+    "osvFindings": 0
+  },
+  "adoption": {
+    "qualifiedPullRequestTarget": "webitel/webitel-ui-sdk",
+    "qualifiedIssueTarget": "google/pprof-nodejs",
+    "qualifiedIssueTargetUseClass": "DIRECT_DEV_TEST_DEPENDENCY_AND_ACTUAL_TEST_CALLS",
+    "rejectedIssueTarget": "haiwen/seahub",
+    "rejectedIssueTargetReason": "ISSUE_CREATION_RESTRICTED",
+    "differentRepositories": true,
+    "publicContactCreated": false
+  },
+  "publication": {
+    "artifactBuilt": false,
+    "npmPublished": false,
+    "githubRepositoryCreated": false,
+    "documentationPublished": false
+  },
+  "localDecisionRecord": "projects/deep-copy/UPSTREAM_AUDIT.md",
+  "canonicalDriveRecordId": null,
+  "canonicalDriveRecordUrl": null
+}

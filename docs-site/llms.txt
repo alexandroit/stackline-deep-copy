@@ -1,0 +1,6 @@
+# @stackline/deep-copy on Alexandro.Net
+
+- Documentation: https://alexandro.net/docs/vanilla/deep-copy/
+- npm: https://www.npmjs.com/package/@stackline/deep-copy
+- Source: https://github.com/alexandroit/stackline-deep-copy
+- License: MIT

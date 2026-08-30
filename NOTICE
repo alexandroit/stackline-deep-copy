@@ -1,0 +1,5 @@
+@stackline/deep-copy is a compatibility-first maintained continuation of the
+independent deep-copy package originally written by Simeon Velichkov.
+
+The original MIT copyright and license are preserved in LICENSE. Stackline and
+Alexandro.Net are not affiliated with or endorsed by the original maintainer.

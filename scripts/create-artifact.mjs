@@ -1,0 +1,115 @@
+import assert from 'node:assert/strict'
+import crypto from 'node:crypto'
+import { execFileSync } from 'node:child_process'
+import { access, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import os from 'node:os'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const root = fileURLToPath(new URL('../', import.meta.url))
+const destination = path.join(root, 'release-candidate')
+
+function run (command, arguments_, options = {}) {
+  return execFileSync(command, arguments_, {
+    cwd: root,
+    encoding: 'utf8',
+    env: { ...process.env, NO_UPDATE_NOTIFIER: '1' },
+    stdio: ['ignore', 'pipe', 'pipe'],
+    ...options
+  })
+}
+
+function npm (arguments_, options = {}) {
+  return run(process.platform === 'win32' ? 'npm.cmd' : 'npm', arguments_, options)
+}
+
+function git (arguments_) {
+  return run('git', arguments_).trim()
+}
+
+const npmVersion = npm(['--version']).trim()
+assert.equal(npmVersion, '10.8.2', 'artifact preparation requires npm 10.8.2')
+const sourceCommit = git(['rev-parse', '--verify', 'HEAD'])
+assert.match(sourceCommit, /^[0-9a-f]{40}$/)
+assert.match(process.env.STACKLINE_GREEN_COMMIT || '', /^[0-9a-f]{40}$/, 'set STACKLINE_GREEN_COMMIT')
+assert.equal(process.env.STACKLINE_GREEN_COMMIT, sourceCommit)
+assert.equal(git(['status', '--porcelain=v1', '--untracked-files=all']), '', 'artifact preparation requires a clean worktree')
+
+try {
+  await access(destination)
+  assert.fail('release-candidate already exists; inspect it rather than overwriting it')
+} catch (error) {
+  if (error.code !== 'ENOENT') throw error
+}
+
+const commitTimestamp = new Date(git(['show', '-s', '--format=%cI', sourceCommit])).toISOString()
+npm(['run', 'verify'], { stdio: 'inherit' })
+assert.equal(git(['status', '--porcelain=v1', '--untracked-files=all']), '', 'verification changed tracked source files')
+
+const temporary = await mkdtemp(path.join(os.tmpdir(), 'stackline-deep-copy-artifact-'))
+await mkdir(destination)
+try {
+  const raw = npm(['pack', '--silent', '--json', '--ignore-scripts', '--pack-destination', destination]).trim()
+  const record = JSON.parse(raw.slice(raw.lastIndexOf('\n[') + 1))[0]
+  const archive = path.join(destination, record.filename)
+  const bytes = await readFile(archive)
+  const hashes = {}
+  for (const algorithm of ['sha1', 'sha256', 'sha512']) {
+    hashes[algorithm] = crypto.createHash(algorithm).update(bytes).digest('hex')
+    await writeFile(path.join(destination, `${algorithm.toUpperCase()}SUMS`), `${hashes[algorithm]}  ${record.filename}\n`)
+  }
+
+  const metadata = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'))
+  const sbom = JSON.parse(npm(['sbom', '--omit=dev', '--sbom-format=cyclonedx']))
+  assert.deepEqual(sbom.components || [], [])
+  const inventory = record.files
+    .map((file) => ({ path: file.path, size: file.size }))
+    .sort((left, right) => left.path.localeCompare(right.path))
+
+  await writeFile(path.join(destination, 'inventory.json'), `${JSON.stringify(inventory, null, 2)}\n`)
+  await writeFile(path.join(destination, 'licenses.json'), `${JSON.stringify({
+    package: { license: metadata.license, name: metadata.name, version: metadata.version },
+    productionDependencies: [],
+    upstreamAttribution: 'deep-copy@1.4.2, copyright Simeon Velichkov, MIT'
+  }, null, 2)}\n`)
+  await writeFile(path.join(destination, 'production-closure.json'), `${JSON.stringify({
+    nodes: [`${metadata.name}@${metadata.version}`],
+    optionalDependencies: [],
+    peerDependencies: [],
+    bundledDependencies: [],
+    runtimeDependencies: [],
+    status: 'PASS_ONE_NODE'
+  }, null, 2)}\n`)
+  await writeFile(path.join(destination, 'sbom.cdx.json'), `${JSON.stringify(sbom, null, 2)}\n`)
+  await writeFile(path.join(destination, 'release-manifest.json'), `${JSON.stringify({
+    schema: 'stackline-release-artifact-v1',
+    package: `${metadata.name}@${metadata.version}`,
+    sourceCommit,
+    commitTimestamp,
+    npmVersion,
+    filename: record.filename,
+    bytes: bytes.length,
+    fileCount: inventory.length,
+    integrity: record.integrity,
+    packedSize: record.size,
+    unpackedSize: record.unpackedSize,
+    hashes
+  }, null, 2)}\n`)
+  await writeFile(path.join(destination, 'RELEASE_NOTES.md'), [
+    `# ${metadata.name} ${metadata.version}`,
+    '',
+    'Compatibility-first continuation of deep-copy 1.4.2 with cycle-safe',
+    'iterative traversal, safe dangerous-key writes, native ESM, current types,',
+    'and zero production dependencies.',
+    '',
+    `Source commit: ${sourceCommit}`,
+    `Commit timestamp: ${commitTimestamp}`,
+    '',
+    'See CHANGELOG.md and COMPATIBILITY_CONTRACT.md for exact behavior.',
+    ''
+  ].join('\n'))
+
+  console.log(JSON.stringify({ archive, hashes, integrity: record.integrity, sourceCommit }, null, 2))
+} finally {
+  await rm(temporary, { force: true, recursive: true })
+}
