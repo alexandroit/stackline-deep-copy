@@ -5,7 +5,7 @@ Decision time: 2026-08-30T02:52:11Z
 Selection: effective unconsumed qualified-intake rank 1; original Scout intake
 position 17; no user pin  
 Target: `@stackline/deep-copy@1.0.0`  
-Decision: **GO, conditional on every release red gate**  
+Decision: **GO; all release and adoption gates passed, state PUBLISHED**
 Reason: `STALE_ZERO_DEPENDENCY_LEGACY_UTILITY_WITH_REPRODUCIBLE_EDGE_DEFECTS_AND_TWO_DISTINCT_DIRECT_ADOPTION_PATHS`
 
 ## Evidence
@@ -46,3 +46,22 @@ closure gates pass for implementation. Publication remains blocked until local
 validation, source/full zero-finding audits, clean scoped and alias installs,
 packed inventory/SBOM, hosted CI and CodeQL on the exact commit, Verdaccio byte
 verification, and all remaining immutable release/documentation gates pass.
+
+## Final state — 2026-08-30
+
+Every named red gate passed. Exact release commit
+`41b095347bb70f9e085bb6140ded5af11a8e05ff` passed required hosted CI and
+CodeQL before artifact construction. The accepted 6,511-byte tarball has
+SHA-256 `f7e9fb617c0c9e94904a37b94ac116a6d9a2f4319923518ea2cf10cd5161a9b8`;
+Verdaccio and official npm returned those exact bytes, and official publication
+occurred once at `2026-08-30T03:19:05.017Z`.
+
+The annotated immutable `stackline-v1.0.0` tag and GitHub release point to the
+same green commit. Tag CI and CodeQL passed. Package documentation, all three
+localized catalog records, server-rendered home, search, robots, sitemap and
+machine-readable references are verified at Alexandro.Net.
+
+Release-local adoption coverage is complete: focused pull request
+<https://github.com/webitel/webitel-ui-sdk/pull/1714> and different-repository
+maintainer-decision issue <https://github.com/google/pprof-nodejs/issues/359>.
+No user pin was involved. The release checkpoint is cleared.
