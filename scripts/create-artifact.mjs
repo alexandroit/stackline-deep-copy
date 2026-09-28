@@ -28,7 +28,7 @@ function git (arguments_) {
 }
 
 const npmVersion = npm(['--version']).trim()
-assert.equal(npmVersion, '10.8.2', 'artifact preparation requires npm 10.8.2')
+assert.equal(npmVersion, '11.19.0', 'artifact preparation requires npm 11.19.0')
 const sourceCommit = git(['rev-parse', '--verify', 'HEAD'])
 assert.match(sourceCommit, /^[0-9a-f]{40}$/)
 assert.match(process.env.STACKLINE_GREEN_COMMIT || '', /^[0-9a-f]{40}$/, 'set STACKLINE_GREEN_COMMIT')
