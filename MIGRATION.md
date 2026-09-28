@@ -4,7 +4,7 @@ The safest drop-in migration preserves the historical dependency and import
 key with an npm alias:
 
 ```json
-"deep-copy": "npm:@stackline/deep-copy@^1.0.0"
+"deep-copy": "npm:@stackline/deep-copy@^1.0.1"
 ```
 
 Regenerate the lockfile with the repository's existing package manager, then

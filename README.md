@@ -60,7 +60,7 @@ Identity-preserving migration under the historical dependency key:
 ```json
 {
   "dependencies": {
-    "deep-copy": "npm:@stackline/deep-copy@^1.0.0"
+    "deep-copy": "npm:@stackline/deep-copy@^1.0.1"
   }
 }
 ```
