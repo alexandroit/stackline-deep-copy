@@ -13,12 +13,12 @@ assert.equal(sbom.bomFormat, 'CycloneDX')
 // `stackline-deep-copy`, while the release workspace is named `deep-copy`.
 // Validate the stable package coordinates instead of that location-dependent
 // display field.
-assert.equal(sbom.metadata.component['bom-ref'], '@stackline/deep-copy@1.0.0')
-assert.equal(sbom.metadata.component.purl, 'pkg:npm/%40stackline/deep-copy@1.0.0')
-assert.equal(sbom.metadata.component.version, '1.0.0')
+assert.equal(sbom.metadata.component['bom-ref'], '@stackline/deep-copy@1.0.1')
+assert.equal(sbom.metadata.component.purl, 'pkg:npm/%40stackline/deep-copy@1.0.1')
+assert.equal(sbom.metadata.component.version, '1.0.1')
 assert.deepEqual(sbom.components || [], [])
 assert.deepEqual(sbom.dependencies, [
-  { ref: '@stackline/deep-copy@1.0.0', dependsOn: [] }
+  { ref: '@stackline/deep-copy@1.0.1', dependsOn: [] }
 ])
 
 console.log('CycloneDX SBOM matches the one-node production closure.')

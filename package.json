@@ -1,6 +1,6 @@
 {
   "name": "@stackline/deep-copy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Compatibility-first legacy deep copying with cycle support and safe property handling",
   "keywords": [
     "deep",
@@ -8,7 +8,9 @@
     "clone",
     "object",
     "array",
-    "stackline"
+    "stackline",
+    "deep-copy",
+    "cyclic-objects"
   ],
   "license": "MIT",
   "author": "Stackline maintainers",
