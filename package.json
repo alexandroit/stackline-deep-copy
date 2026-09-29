@@ -1,15 +1,18 @@
 {
   "name": "@stackline/deep-copy",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Compatibility-first legacy deep copying with cycle support and safe property handling",
   "keywords": [
+    "stackline",
+    "npm-package",
+    "deep-copy",
+    "typescript",
+    "nodejs",
     "deep",
     "copy",
     "clone",
     "object",
     "array",
-    "stackline",
-    "deep-copy",
     "cyclic-objects"
   ],
   "license": "MIT",
