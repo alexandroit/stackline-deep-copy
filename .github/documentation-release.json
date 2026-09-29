@@ -1,0 +1,29 @@
+{
+  "repository": "alexandroit/stackline-deep-copy",
+  "packages": [
+    {
+      "name": "@stackline/deep-copy",
+      "path": "README.md",
+      "version": "1.0.2",
+      "baselineVersion": "1.0.1",
+      "keywords": [
+        "stackline",
+        "npm-package",
+        "deep-copy",
+        "typescript",
+        "nodejs",
+        "deep",
+        "copy",
+        "clone",
+        "object",
+        "array",
+        "cyclic-objects"
+      ],
+      "homepage": "https://alexandro.net/docs/vanilla/deep-copy/",
+      "baselineTarball": "https://registry.npmjs.org/@stackline/deep-copy/-/deep-copy-1.0.1.tgz",
+      "baselineIntegrity": "sha512-wIE2JwN8R0VR3Bz5PYk8ZxJAfJnbbdJRK7yTaf+ZYfI/E/nrYOUjvB3M+i+s8Kx6ZUK5bZgmyp6Ru4s6a4VNOQ==",
+      "expectedSha512": "df603757b5d7af9a4d9cd820014b13989f970cdb85b5f1d56819c45794884bd408c08d847f52f53078de74c9d5676eabe2c01677da1702c259c7c542136da8dd",
+      "tag": "docs-stackline-deep-copy-v1.0.2"
+    }
+  ]
+}
