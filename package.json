@@ -1,6 +1,6 @@
 {
   "name": "@stackline/deep-copy",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Compatibility-first legacy deep copying with cycle support and safe property handling",
   "keywords": [
     "stackline",

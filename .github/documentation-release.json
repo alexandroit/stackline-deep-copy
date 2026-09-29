@@ -4,7 +4,7 @@
     {
       "name": "@stackline/deep-copy",
       "path": "README.md",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "baselineVersion": "1.0.1",
       "keywords": [
         "stackline",
@@ -22,8 +22,8 @@
       "homepage": "https://alexandro.net/docs/vanilla/deep-copy/",
       "baselineTarball": "https://registry.npmjs.org/@stackline/deep-copy/-/deep-copy-1.0.1.tgz",
       "baselineIntegrity": "sha512-wIE2JwN8R0VR3Bz5PYk8ZxJAfJnbbdJRK7yTaf+ZYfI/E/nrYOUjvB3M+i+s8Kx6ZUK5bZgmyp6Ru4s6a4VNOQ==",
-      "expectedSha512": "df603757b5d7af9a4d9cd820014b13989f970cdb85b5f1d56819c45794884bd408c08d847f52f53078de74c9d5676eabe2c01677da1702c259c7c542136da8dd",
-      "tag": "docs-stackline-deep-copy-v1.0.2"
+      "expectedSha512": "3c7959471b1d8d8dcfff3fd68d4740a4a1b5e44394f17b14ec825aac5fd471aa6697d146a8e49ccf840f1fc64fd21aa5e45d7dc55d5a7e95cab4b1e583cf8804",
+      "tag": "docs-stackline-deep-copy-v1.0.3"
     }
   ]
 }
