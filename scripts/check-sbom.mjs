@@ -1,5 +1,8 @@
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
+import { readFile } from 'node:fs/promises'
+
+const metadata = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'))
 
 const result = spawnSync('npm', ['sbom', '--omit=dev', '--sbom-format=cyclonedx'], {
   cwd: new URL('../', import.meta.url),
@@ -13,12 +16,12 @@ assert.equal(sbom.bomFormat, 'CycloneDX')
 // `stackline-deep-copy`, while the release workspace is named `deep-copy`.
 // Validate the stable package coordinates instead of that location-dependent
 // display field.
-assert.equal(sbom.metadata.component['bom-ref'], '@stackline/deep-copy@1.0.1')
-assert.equal(sbom.metadata.component.purl, 'pkg:npm/%40stackline/deep-copy@1.0.1')
-assert.equal(sbom.metadata.component.version, '1.0.1')
+assert.equal(sbom.metadata.component['bom-ref'], `${metadata.name}@${metadata.version}`)
+assert.equal(sbom.metadata.component.purl, `pkg:npm/%40stackline/deep-copy@${metadata.version}`)
+assert.equal(sbom.metadata.component.version, metadata.version)
 assert.deepEqual(sbom.components || [], [])
 assert.deepEqual(sbom.dependencies, [
-  { ref: '@stackline/deep-copy@1.0.1', dependsOn: [] }
+  { ref: `${metadata.name}@${metadata.version}`, dependsOn: [] }
 ])
 
 console.log('CycloneDX SBOM matches the one-node production closure.')

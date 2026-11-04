@@ -28,7 +28,7 @@ endorsed by the original maintainer.
 
 | Item | Value |
 | --- | --- |
-| Package | `@stackline/deep-copy@1.0.3` |
+| Package | `@stackline/deep-copy@1.0.4` |
 | Node.js runtime | `>=4.0.0` |
 | CommonJS / primary entry | `./index.js` |
 | ES module entry | `./index.mjs` |
