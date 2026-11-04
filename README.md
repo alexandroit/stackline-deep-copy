@@ -10,7 +10,7 @@
 
 **[Documentation](https://alexandro.net/docs/vanilla/deep-copy/)** | **[npm](https://www.npmjs.com/package/@stackline/deep-copy)** | **[Issues](https://github.com/alexandroit/stackline-deep-copy/issues)** | **[Repository](https://github.com/alexandroit/stackline-deep-copy)**
 
-**Current package version:** `1.0.3`
+**Current package version:** `1.0.5`
 
 ---
 
@@ -28,7 +28,7 @@ endorsed by the original maintainer.
 
 | Item | Value |
 | --- | --- |
-| Package | `@stackline/deep-copy@1.0.4` |
+| Package | `@stackline/deep-copy@1.0.5` |
 | Node.js runtime | `>=4.0.0` |
 | CommonJS / primary entry | `./index.js` |
 | ES module entry | `./index.mjs` |
